@@ -1,0 +1,17 @@
+.MuiAppBar-root, .MuiToolbar-root{
+    background-color: #4e71ff;
+    height: 80px;
+}
+
+.logoContainer{
+    display: flex;
+    max-width: 100vw;
+    width: 100%;
+}
+
+.logoContainer .logo{
+    width: 13%;
+    margin: auto;
+}
+
+
