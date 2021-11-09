@@ -1,0 +1,18 @@
+.MuiCard-root{
+  margin-bottom: 30px;
+  border-radius: 14px;
+  width: 100%;
+  padding: 15px;
+}
+
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.MuiCardActions-root{
+  display: flex;
+  gap:10px;
+}
+

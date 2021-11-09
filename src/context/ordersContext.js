@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const OrdersContext = React.createContext({
     firstName: "",
@@ -20,27 +20,19 @@ export default function OrdersProvider({children}){
     const [firstName, setFirstName] = useState("");  
     const [LastName, setLastName] = useState(""); 
     const [Date, setDate] = useState(""); 
-    const [OrderId, setOrderId] = useState(0);
-    const [orders, setOrders] = useState([
-        {
-            id: OrderId,
-            firstName: "",
-            LastName: "",
-            Date: ""
-        },
-
-    ]);
+    const [OrderId, setOrderId] = useState(1);
+    const [orders, setOrders] = useState([]);
 
     const addOrder = () => {
-     
-            // if (!todoItem) return;
             setOrderId(OrderId+1);
             orders.push({id: OrderId, firstName, LastName, Date});
             setOrders(orders);
-           
     };
 
+    useEffect(() =>{
+       console.log("orders",orders)
 
+    },[orders] )
 
     return (
         <OrdersContext.Provider value={{

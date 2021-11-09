@@ -1,5 +1,5 @@
 import Header from "./components/header";
-import Order from "./components/Order";
+import Form from "./components/form";
 import OrdersProvider from './context/ordersContext.js';
 
 
@@ -9,7 +9,7 @@ function App() {
     
    <OrdersProvider>
         <Header/>
-        <Order/>
+        <Form/>
     </OrdersProvider>
    
   );
