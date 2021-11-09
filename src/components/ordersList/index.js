@@ -7,14 +7,14 @@ import './style.css';
 
 
 export default function OrdersList(){
-    const { orders, OrderId } = useContext(OrdersContext);
+    const { orders } = useContext(OrdersContext);
 
     return(
         <div className="ordersContainer">
             <Typography variant="h5" style={{ fontWeight: 600 }}>רשימת הזמנות</Typography>
-            <Typography variant="h6"> מספר הזמנות: <span className="sumOrders">{OrderId-1}</span></Typography>
+            <Typography variant="h6"> מספר הזמנות: <span className="sumOrders">{orders.length}</span></Typography>
             {orders.length > 0 ?
-            orders.map((order, index) => <OrderItem key={index} {...order} />)
+            orders.map((order, index) => <OrderItem key={index} data={order} />)
             :
             ""
             }

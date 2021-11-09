@@ -12,18 +12,15 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import './style.css'
-import {useContext, useEffect, useRef} from 'react';
+import {useContext} from 'react';
 import {OrdersContext} from '../../context/ordersContext.js';
 import OrdersList from '../ordersList/index.js';
 
 
 export default function Form(){
-    const { setFirstName, setLastName, setDate, addOrder, firstName, LastName, Date} = useContext(OrdersContext);
+    const { addOrder, currentOrder, setCurrentOrder} = useContext(OrdersContext);
 
-    const firstNameRef = useRef("");
-    const LastNameRef = useRef("");
 
-    
     const theme = createTheme({
         palette: {
           primary:{
@@ -34,18 +31,9 @@ export default function Form(){
 
     const handleSubmit = e =>{
         e.preventDefault();
-        setFirstName(firstNameRef.current.value);
-        setLastName(LastNameRef.current.value);
+        addOrder();
         e.currentTarget.reset();
-       
     }
-
-
-    useEffect(() =>{
-        if (Date){
-            addOrder();
-        }
-     },[firstName, LastName] )
 
         
     return(
@@ -59,20 +47,20 @@ export default function Form(){
                         <div className="fields_container">
                             <div className="firstName_container">
                                 <InputLabel >שם פרטי</InputLabel>
-                                <TextField id="outlined-basic" label="" variant="outlined"  inputRef={firstNameRef}/>
+                                <TextField id="outlined-basic"  variant="outlined"  onChange={(e)=>setCurrentOrder(oldval => ({ ...oldval, firstName: e.target.value}))} value={currentOrder.firstName }/>
                             </div>
                             <div className="lastName_container">
                                 <InputLabel >שם משפחה</InputLabel>
-                                <TextField id="outlined-basic" label="" variant="outlined" inputRef={LastNameRef}/>
+                                <TextField id="outlined-basic" variant="outlined" onChange={(e)=>setCurrentOrder(oldval => ({ ...oldval, LastName: e.target.value}))} value={currentOrder.LastName }/>
                             </div>
                             <div className="date_container">
                                 <InputLabel >תאריך</InputLabel>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DatePicker
                                         inputFormat="dd/MM/yyyy"
-                                        value={Date}
+                                        value={currentOrder.Date}
                                         onChange={(newValue) => {
-                                        setDate(newValue);
+                                        setCurrentOrder(oldval => ({ ...oldval, Date: newValue}));
                                         }}
                                         renderInput={props => {
                                             console.log("props", props.inputProps.value);

@@ -1,52 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export const OrdersContext = React.createContext({
-    firstName: "",
-    setFirstName: () => {},
-    LastName: "",
-    setLastName: () => {},
     orders: [],
     setOrders: () => {},
-    OrderId: "",
-    setOrderId: () => {},
-    Date: "",
-    setDate: () => {},
     addOrder: () => {},
+    isEditing: false,
+    setIsEditing: () => {},
+    currentOrder: {},
+    setCurrentOrder: () => {},
    
 });
 
 
 export default function OrdersProvider({children}){
-    const [firstName, setFirstName] = useState("");  
-    const [LastName, setLastName] = useState(""); 
-    const [Date, setDate] = useState(""); 
-    const [OrderId, setOrderId] = useState(1);
+    
     const [orders, setOrders] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentOrder, setCurrentOrder] = useState({
+
+        id: 1,
+        firstName: "",
+        LastName: "",
+        Date: ""
+    });
+
 
     const addOrder = () => {
-            setOrderId(OrderId+1);
-            orders.push({id: OrderId, firstName, LastName, Date});
-            setOrders(orders);
+            setOrders((oldval) => [ ...oldval, {...currentOrder, id: orders.length+1}]);
     };
 
-    useEffect(() =>{
-       console.log("orders",orders)
-
-    },[orders] )
 
     return (
         <OrdersContext.Provider value={{
-            firstName,
-            setFirstName,
-            LastName,
-            setLastName,
-            Date,
-            setDate,
-            OrderId,
-            setOrderId,
             orders,
             setOrders,
-            addOrder
+            addOrder,
+            isEditing,
+            setIsEditing,
+            currentOrder,
+            setCurrentOrder
         }}>
             {children}
         </OrdersContext.Provider>

@@ -12,35 +12,37 @@ import {useContext} from 'react';
 import {OrdersContext} from '../../context/ordersContext.js';
 
 
-export default function OrderItem({
-    id,
-    firstName,
-    LastName,
-    Date
-}){
+export default function OrderItem({data}){
 
-    const { OrderId ,setOrderId, orders, setOrders} = useContext(OrdersContext);
+    const {  orders, setOrders, setIsEditing, setCurrentOrder} = useContext(OrdersContext);
+    
 
     const handleDelete = (e, index) =>{
         e.preventDefault();
         const newOrders = [...orders];
         newOrders.splice(index,1);
         setOrders(newOrders);
-        setOrderId(OrderId-1);
+    }
+    
+    const handleEdit= (e) =>{
+        e.preventDefault();
+        setIsEditing(true);
+        setCurrentOrder(data);
     }
 
-  console.log("iddd", id)
 
     return(      
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <div className="titleContainer">
                     <Typography sx={{ fontSize: 12 }} variant="h5" style={{ fontWeight: 600 }}>
-                    הזמנה {id}
+                    הזמנה {data.id}
                     </Typography>
                     <CardActions>
-                        <Edit/>
-                        <button className="deleteOrder" id={id}  onClick ={handleDelete} >
+                         <button className="editOrder" onClick ={handleEdit} >
+                             <Edit/>
+                        </button>
+                        <button className="deleteOrder" onClick ={handleDelete} >
                             <Close/>
                         </button>
                     </CardActions>
@@ -49,17 +51,17 @@ export default function OrderItem({
                 פרטים 
                 </Typography>
                 <Typography component="span">
-                {firstName},
+                {data.firstName},
                 </Typography>
                 <Typography component="span">
-                {LastName}
+                {data.LastName}
                 </Typography>
                 <Typography component="div">
-                {Date.toString().substring(4,15)}
+                {data.Date?.toString().substring(4,15)}
                 </Typography>
             </CardContent>
             
-            </Card>
+        </Card>
 
         
     )
