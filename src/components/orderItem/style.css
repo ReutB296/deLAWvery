@@ -16,3 +16,9 @@
   gap:10px;
 }
 
+.editOrder, .deleteOrder{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+

@@ -21,12 +21,14 @@ export default function OrdersProvider({children}){
         id: 1,
         firstName: "",
         LastName: "",
-        Date: ""
+        Date: "",
+        isEditing: false,
     });
 
 
     const addOrder = () => {
             setOrders((oldval) => [ ...oldval, {...currentOrder, id: orders.length+1}]);
+            setCurrentOrder({});
     };
 
 

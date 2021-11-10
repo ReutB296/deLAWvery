@@ -14,20 +14,23 @@ import {OrdersContext} from '../../context/ordersContext.js';
 
 export default function OrderItem({data}){
 
-    const {  orders, setOrders, setIsEditing, setCurrentOrder} = useContext(OrdersContext);
+    const {  orders, setOrders, setIsEditing, setCurrentOrder, isEditing } = useContext(OrdersContext);
     
 
     const handleDelete = (e, index) =>{
         e.preventDefault();
         const newOrders = [...orders];
         newOrders.splice(index,1);
+        newOrders.forEach(order => order.id--)
         setOrders(newOrders);
     }
     
     const handleEdit= (e) =>{
         e.preventDefault();
         setIsEditing(true);
+        data.isEditing = true;
         setCurrentOrder(data);
+        setIsEditing(true);
     }
 
 
@@ -39,9 +42,11 @@ export default function OrderItem({data}){
                     הזמנה {data.id}
                     </Typography>
                     <CardActions>
+                        { data.isEditing ? "" :
                          <button className="editOrder" onClick ={handleEdit} >
                              <Edit/>
                         </button>
+                        }
                         <button className="deleteOrder" onClick ={handleDelete} >
                             <Close/>
                         </button>
