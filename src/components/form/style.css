@@ -48,11 +48,24 @@
 .mainContainer{
     display: flex;
     gap: 100px;
+    min-height: 100vh;
+    height: 100%;
+   
 }
 
 .firstName_container, .lastName_container, .MuiButtonBase-root{
     max-width: 261px;
     width: 100%;
+   
+}
+
+.MuiButton-label{
+    font-size: 20px;
+    
+}
+
+.MuiTypography-h2, .MuiInputLabel-root{
+    font-family: 'Varela Round', sans-serif !important;
 }
 
 

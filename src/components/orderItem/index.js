@@ -14,7 +14,7 @@ import {OrdersContext} from '../../context/ordersContext.js';
 
 export default function OrderItem({data}){
 
-    const {  orders, setOrders, setIsEditing, setCurrentOrder, isEditing } = useContext(OrdersContext);
+    const {  orders, setOrders, setIsEditing, setCurrentOrder } = useContext(OrdersContext);
     
 
     const handleDelete = (e, index) =>{

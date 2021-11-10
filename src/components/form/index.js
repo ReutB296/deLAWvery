@@ -11,14 +11,13 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import './style.css'
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useState} from 'react';
 import {OrdersContext} from '../../context/ordersContext.js';
 import OrdersList from '../ordersList/index.js';
 
 
 export default function Form(){
 const { addOrder, currentOrder, setCurrentOrder, isEditing, setIsEditing, orders} = useContext(OrdersContext);
-const [bttnType, setBttnType] = useState("");
 
 
 const theme = createTheme({
@@ -30,7 +29,6 @@ const theme = createTheme({
   });
 
 const handleAddSubmit = ()=>{
-    console.log("im here")
     addOrder();
 }
 
@@ -79,7 +77,6 @@ return(
                                     setCurrentOrder(oldval => ({ ...oldval, Date: newValue}));
                                     }}
                                     renderInput={props => {
-                                        console.log("props", props.inputProps.value);
                                         return <TextField {...props} />;
                                     }}
                                 />
