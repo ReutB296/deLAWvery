@@ -1,4 +1,3 @@
-
 import {
     Typography,
     Button,
@@ -37,9 +36,18 @@ const handleAddSubmit = ()=>{
 
 
 const handleEditSubmit = ()=>{
-    orders[currentOrder.id-1].isEditing = false;
-    setCurrentOrder({});
-    setIsEditing(false);
+    orders[currentOrder.id-1].isEditing = false; //bring back the edit icon
+    orders[currentOrder.id-1].firstName = currentOrder.firstName;   //add the changes
+    orders[currentOrder.id-1].LastName = currentOrder.LastName;      
+    orders[currentOrder.id-1].Date = currentOrder.Date;               
+    setCurrentOrder({    //clean the form
+        id: orders.length,
+        firstName: "",
+        LastName: "",
+        Date: "",
+        isEditing: false,
+    });        
+    setIsEditing(false);         // update the flag
 }
 
 
